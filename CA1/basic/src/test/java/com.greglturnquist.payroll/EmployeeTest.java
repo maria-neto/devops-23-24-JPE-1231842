@@ -15,9 +15,10 @@ public class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 4;
+        String email = "frodo@shire.com";
 
         // act
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
 
         //assert
         assertNotNull(employee);
@@ -31,10 +32,11 @@ public class EmployeeTest {
         String description = "ring bearer";
         int jobYears = 4;
         String expectedMessage = "Invalid arguments";
+        String email = "frodo@shire.com";
 
         // act
         Exception exception = assertThrows(InstantiationException.class, () ->
-                new Employee(firstName, lastName, description, jobYears)
+                new Employee(firstName, lastName, description, jobYears, email)
         );
         String actualMessage = exception.getMessage();
 
@@ -50,10 +52,11 @@ public class EmployeeTest {
         String description = "ring bearer";
         int jobYears = 4;
         String expectedMessage = "Invalid arguments";
+        String email = "frodo@shire.com";
 
         // act
         Exception exception = assertThrows(InstantiationException.class, () ->
-                new Employee(firstName, lastName, description, jobYears)
+                new Employee(firstName, lastName, description, jobYears, email)
         );
         String actualMessage = exception.getMessage();
 
@@ -69,10 +72,11 @@ public class EmployeeTest {
         String description = " ";
         int jobYears = 4;
         String expectedMessage = "Invalid arguments";
+        String email = "frodo@shire.com";
 
         // act
         Exception exception = assertThrows(InstantiationException.class, () ->
-                new Employee(firstName, lastName, description, jobYears)
+                new Employee(firstName, lastName, description, jobYears, email)
         );
         String actualMessage = exception.getMessage();
 
@@ -88,10 +92,11 @@ public class EmployeeTest {
         String description = "ring bearer";
         int jobYears = -1;
         String expectedMessage = "Invalid arguments";
+        String email = "frodo@shire.com";
 
         // act
         Exception exception = assertThrows(InstantiationException.class, () ->
-                new Employee(firstName, lastName, description, jobYears)
+                new Employee(firstName, lastName, description, jobYears, email)
         );
         String actualMessage = exception.getMessage();
 
@@ -107,7 +112,9 @@ public class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 4;
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String email = "frodo@shire.com";
+
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
 
         // act
         employee.setId(id);
@@ -123,7 +130,8 @@ public class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 4;
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String email = "frodo@shire.com";
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
         String newFirstName = "Bilbo";
 
         // act
@@ -140,7 +148,8 @@ public class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 4;
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String email = "frodo@shire.com";
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
         String newLastName = "Simmons";
 
         // act
@@ -157,7 +166,8 @@ public class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 4;
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String email = "frodo@shire.com";
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
         String newDescription = "Elf friend";
 
         // act
@@ -174,7 +184,8 @@ public class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 4;
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String email = "frodo@shire.com";
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
         int newJobYears = 5;
 
         // act
@@ -182,6 +193,24 @@ public class EmployeeTest {
 
         // assert
         assertEquals(newJobYears, employee.getJobYears());
+    }
+
+    @Test
+    public void setAndGetEmail() throws InstantiationException {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String email = "frodo@shire.com";
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
+        String newEmail = "frodo@mordor.com";
+
+        // act
+        employee.setEmail(newEmail);
+
+        // assert
+        assertEquals(newEmail, employee.getEmail());
     }
 
 }
