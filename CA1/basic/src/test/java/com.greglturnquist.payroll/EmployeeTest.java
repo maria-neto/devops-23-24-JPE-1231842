@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertThrows;
 
 public class EmployeeTest {
 
@@ -20,6 +21,82 @@ public class EmployeeTest {
 
         //assert
         assertNotNull(employee);
+    }
+
+    @Test
+    public void invalidFirstName_shouldThrowException() {
+        // arrange
+        String firstName = null;
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void invalidLastName_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void invalidDescription_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = " ";
+        int jobYears = 4;
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void invalidJobYears_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = -1;
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
