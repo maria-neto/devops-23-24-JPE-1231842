@@ -125,6 +125,66 @@ public class EmployeeTest {
     }
 
     @Test
+    public void invalidEmailAddress_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String email = "frodo@shire";
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears, email)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void invalidEmailAddress1_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String email = "frodo.shire.com";
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears, email)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void invalidEmailAddress2_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String email = "@frodo.shire";
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears, email)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
     public void setAndGetId() throws InstantiationException {
         // arrange
         Long id = 123456789L;
@@ -233,4 +293,25 @@ public class EmployeeTest {
         assertEquals(newEmail, employee.getEmail());
     }
 
+    @Test
+    public void setInvalidEmail_shouldThrowException() throws InstantiationException {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String email = "frodo@shire.com";
+        String newEmail = "frodo.shire.com";
+        String expectedMessage = "Invalid email";
+        Employee employee = new Employee(firstName, lastName, description, jobYears, email);
+
+        // act
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                employee.setEmail(newEmail)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
 }
