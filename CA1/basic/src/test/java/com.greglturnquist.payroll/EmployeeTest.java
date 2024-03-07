@@ -105,6 +105,26 @@ public class EmployeeTest {
     }
 
     @Test
+    public void invalidEmail_shouldThrowException() {
+        // arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        String email = null;
+        String expectedMessage = "Invalid arguments";
+
+        // act
+        Exception exception = assertThrows(InstantiationException.class, () ->
+                new Employee(firstName, lastName, description, jobYears, email)
+        );
+        String actualMessage = exception.getMessage();
+
+        // assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
     public void setAndGetId() throws InstantiationException {
         // arrange
         Long id = 123456789L;
