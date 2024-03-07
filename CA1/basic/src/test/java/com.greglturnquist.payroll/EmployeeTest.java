@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertNotNull;
 public class EmployeeTest {
 
     @Test
-    public void createEmployee(){
+    public void createEmployee() throws InstantiationException {
         // arrange
         String firstName = "Frodo";
         String lastName = "Baggins";
@@ -23,10 +23,14 @@ public class EmployeeTest {
     }
 
     @Test
-    public void setAndGetId() {
+    public void setAndGetId() throws InstantiationException {
         // arrange
         Long id = 123456789L;
-        Employee employee = new Employee("Frodo", "Baggins", "ring bearer", 4);
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        Employee employee = new Employee(firstName, lastName, description, jobYears);
 
         // act
         employee.setId(id);
@@ -36,55 +40,71 @@ public class EmployeeTest {
     }
 
     @Test
-    public void setAndGetFirstName() {
+    public void setAndGetFirstName() throws InstantiationException {
         // arrange
-        String firstName = "Bilbo";
-        Employee employee = new Employee("Frodo", "Baggins", "ring bearer", 4);
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String newFirstName = "Bilbo";
 
         // act
-        employee.setFirstName(firstName);
+        employee.setFirstName(newFirstName);
 
         // assert
-        assertEquals(firstName, employee.getFirstName());
+        assertEquals(newFirstName, employee.getFirstName());
     }
 
     @Test
-    public void setAndGetLastName() {
+    public void setAndGetLastName() throws InstantiationException {
         // arrange
-        String lastName = "Simmons";
-        Employee employee = new Employee("Frodo", "Baggins", "ring bearer", 4);
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String newLastName = "Simmons";
 
         // act
-        employee.setLastName(lastName);
+        employee.setLastName(newLastName);
 
         // assert
-        assertEquals(lastName, employee.getLastName());
+        assertEquals(newLastName, employee.getLastName());
     }
 
     @Test
-    public void setAndGetDescription() {
+    public void setAndGetDescription() throws InstantiationException {
         // arrange
-        String description = "drummer";
-        Employee employee = new Employee("Frodo", "Baggins", "ring bearer", 4);
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        String newDescription = "Elf friend";
 
         // act
-        employee.setDescription(description);
+        employee.setDescription(newDescription);
 
         // assert
-        assertEquals(description, employee.getDescription());
+        assertEquals(newDescription, employee.getDescription());
     }
 
     @Test
-    public void setAndGetJobYears() {
+    public void setAndGetJobYears() throws InstantiationException {
         // arrange
-        int jobYears = 5;
-        Employee employee = new Employee("Frodo", "Baggins", "ring bearer", 4);
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 4;
+        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        int newJobYears = 5;
 
         // act
-        employee.setJobYears(jobYears);
+        employee.setJobYears(newJobYears);
 
         // assert
-        assertEquals(jobYears, employee.getJobYears());
+        assertEquals(newJobYears, employee.getJobYears());
     }
 
 }

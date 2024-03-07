@@ -37,7 +37,9 @@ public class Employee {
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description, int jobYears) {
+	public Employee(String firstName, String lastName, String description, int jobYears) throws InstantiationException {
+		if( !areArgumentsValid(firstName, lastName, description, jobYears))
+			throw new InstantiationException("Invalid arguments");
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
@@ -60,6 +62,18 @@ public class Employee {
 	public int hashCode() {
 
 		return Objects.hash(id, firstName, lastName, description);
+	}
+
+	private boolean areArgumentsValid(String firstName, String lastName, String description, int jobYears) {
+		if( firstName == null || firstName.trim().isEmpty())
+			return false;
+		if( lastName == null || lastName.trim().isEmpty())
+			return false;
+		if( description == null || description.trim().isEmpty())
+			return false;
+		if( jobYears < 0)
+			return false;
+		return true;
 	}
 
 	public Long getId() {
