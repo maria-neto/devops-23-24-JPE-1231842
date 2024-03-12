@@ -319,7 +319,7 @@ and then commit them back to the server.
  **1. Distributed vs Centralized:**
 
 While Git is a distributed version control system, meaning that each user has a complete copy of the repository, Subversion is a
-centralized version control system, meaning that there is only one single central repository that contains all the files.
+centralized version control system, which means that there is only one single central repository containing all the files.
 
  **2. Branching and Merging:**
 
@@ -342,6 +342,75 @@ them to the central (remote) repository. On the other hand, Subversion requires 
 Git commits are atomic, which means all changes in a commit must be applied or none of them are. However, with Subversion, commits are not atomic
 by default, and it is possible to commit only a part of the changes in a working copy, which may lead to inconsistencies.
 
+
+### Analysis an implementation using Subversion
+In order to further understand the differences between Git and Subversion, an example of implementation using Subversion was analyzed.
+
+#### Creating a new repository
+1. Create the repository:
+```bash 
+svnadmin create /path/to/repository
+```
+2. Checkout remote repository to local working directory:
+```bash
+svn checkout file:///path/to/repository/trunk /path/to/working/directory
+```
+In this command, the term *trunk* refers to the main development branch of the repository, serving a similar purpose to the main or master branch in Git.
+
+3. Add a first version of the README.md file to the staging area:
+```bash
+svn add README.md
+```
+4. Commit the changes made to the README.md file:
+```bash
+svn commit -m "README.md file added to the repository"
+```
+
+Since Subversion is a centralized version control system, the commit command will send the changes made to the central repository.
+As such, push and pull commands are not necessary, as the working directory is always synchronized with the central repository.
+However, ``svn checkout`` and ``svn update`` commands are used to update the working directory with the latest changes from the
+central repository. ``svn checkout`` is used to initially create a working directory from the central repository when starting
+to work on a project for the first time, whereas ``svn update`` is used to update the working directory with changes introduced 
+since the last update.
+
+#### Tagging a version of the project
+First, the user should navigate to the root of the working directory, and then create a tag marking the current version of the project.
+```bash
+cd /path/to/working/directory
+svn copy trunk tags/v1.1.0 -m "initial version"
+```
+
+#### Adding a new feature to the project using a new branch
+To add a new feature to the project, a new branch was created, named *email-field*.
+```bash
+svn mkdir branches/email-field -m "new branch to add email field"
+```
+
+Then, the user should switch to the new branch to start working on the new feature.
+```bash
+cd /path/to/working/directory/branches/email-field
+```
+
+Commit the changes made to the new branch.
+```bash
+svn commit -m "new feature added to the project"
+```
+
+After finishing the development of the new feature, the user should switch back to the trunk.
+```bash
+svn switch ^/trunk
+```
+
+Then, the changes made to the new branch should be merged into the trunk.
+```bash
+svn merge ^/branches/email-field
+```
+After merging, some conflicts may arise, and the user should resolve them before committing the changes to the trunk.
+
+Finally, the user should commit the changes made to the trunk.
+```bash
+svn commit -m "new feature merged into trunk"
+```
 
 
 
