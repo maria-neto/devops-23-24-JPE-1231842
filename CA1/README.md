@@ -1,4 +1,4 @@
-# Report for Class Assignment 1 : Version Control with Git
+# Class Assignment 1 : Version Control with Git
 
 ## Introduction: Version Control Systems
 
@@ -22,27 +22,28 @@ this assignment, a list of the commands used in the command line will be provide
 well as a brief explanation of each one.
 
 ### Initializing the repository
- 1. Command used to initialize the repository:
+
+ 1. Initialize the repository:
 ```bash 
 git init
 ```
- 2. To add a first version of the README.md file, the following command was used:
+ 2. Add a first version of the README.md file to the staging area:
 ```bash
 git add README.md
 ```
- 3. Command required to commit the changes made to the README.md file:
+ 3. Commit the changes made to the README.md file:
 ```bash
 git commit -m "first commit"
 ```
- 4. Command used to rename the master branch to main:
+ 4. Rename the master branch to main branch:
 ```bash
 git branch -M main
 ```
- 5. To add the remote repository previously created on GitHub, the following command was used:
+ 5. Add remote repository, previously created on GitHub, to the local repository:
 ```bash
 git remote add origin https://github.com/maria-neto/devops-23-24-JPE-1231842.git
 ```
- 6. Finally, to push all the changes made to the remote repository, the following command was used:
+ 6. Finally, push all the changes made to the remote repository:
 ```bash
 git push -u origin main
 ```
@@ -55,29 +56,29 @@ mkdir CA1
 Assuming that the project *Tutorial React.js and Spring Data REST Application* is already
 available on the local machine, the following commands were used to add the project to the repository:
 
- 1. Command used to add the basic folder of the project to the repository:
+ 1. Add the basic folder of the project to the repository:
 ```bash
 git mv path/to/TutorialReact.js/And/Spring/Data/REST/Application/basic CA1
 ```
- 2. Command used to add the changes made to the repository:
+ 2. Add the changes made to the staging area:
 ```bash
 git add CA1
 ```
- 3. Command used to commit the changes made to the repository:
+ 3. Commit the changes made to the repository:
 ```bash
 git commit -m "added folder CA1 with Tutorial React.js and Spring Data REST Application"
 ```
- 4. Command used to push the changes made to the remote repository:
+ 4. Push the changes made to the remote repository:
 ```bash
 git push origin main
 ```
 
 ### Creating a tag for the first version of the project
- 1. Command used to tag the first version of the project, which includes a brief message:
+ 1. Create tag for the first version of the project, which includes a brief message:
 ```bash
 git tag -a v.1.1.0 -m "initial version"
 ```
- 2. Command used to push the tag to the remote repository:
+ 2. Push the tag to the remote repository:
 ```bash
 git push origin v.1.1.0
 ```
@@ -91,32 +92,33 @@ that were introduced in the Employee class:
     private int jobYears;
     
     public Employee(String firstName, String lastName, String description, int jobYears) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.description = description;
-            this.jobYears = jobYears;
-        }
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.jobYears = jobYears;
+    }
     
-        public int getJobYears() {
-            return jobYears;
-        }
-    
-        public void setJobYears(int jobYears) {
-            this.jobYears = jobYears;
-        }
+    public int getJobYears() {
+        return jobYears;
+    }
+
+    public void setJobYears(int jobYears) {
+        this.jobYears = jobYears;
+    }
 ```
 After these modifications were introduced, the following commands were used to add the changes to the repository:
- 1. Command used to add the changes made to the repository:
+
+ 1. Add the changes made to the staging area
 ```bash
 git add .
 ```
 This command was used as it was intended to add all the modification added, and commit them.
 
- 2. Command used to commit the changes made to the repository:
+ 2. Commit the changes made to the repository:
 ```bash
 git commit -m "job years added to Employee class, class EmployeeTest created"
 ```
- 3. Command used to push the changes made to the remote repository:
+ 3. Push the changes made to the remote repository:
 ```bash
 git push origin main
 ```
@@ -144,13 +146,13 @@ job years. Here is a representation of the method, as well as its usage in the c
         }
 
     public Employee(String firstName, String lastName, String description, int jobYears) throws InstantiationException {
-            if( !areArgumentsValid(firstName, lastName, description, jobYears, email) || !isEmailAddressValid(email))
-            throw new InstantiationException("Invalid arguments");
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.description = description;
-            this.jobYears = jobYears;
-            }
+        if( !areArgumentsValid(firstName, lastName, description, jobYears, email) || !isEmailAddressValid(email))
+        throw new InstantiationException("Invalid arguments");
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.jobYears = jobYears;
+        }
 ```
 After all the alterations were implemented, the commands used previously were applied in order to commit
 and push the changes to the remote repository. An issue was created to keep track of the changes made to the project, and
@@ -195,14 +197,14 @@ few new unit tests were added. Below is a representation of the changes made to 
     private String email;
 
     public Employee(String firstName, String lastName, String description, int jobYears, String email) throws InstantiationException {
-            if(!areArgumentsValid(firstName, lastName, description, jobYears, email))
-            throw new InstantiationException("Invalid arguments");
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.description = description;
-            this.jobYears = jobYears;
-            this.email = email;
-            }
+        if(!areArgumentsValid(firstName, lastName, description, jobYears, email))
+        throw new InstantiationException("Invalid arguments");
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.jobYears = jobYears;
+        this.email = email;
+        }
 
     private boolean areArgumentsValid(String firstName, String lastName, String description, int jobYears, String email) {
         if( firstName == null || firstName.trim().isEmpty())
@@ -236,7 +238,7 @@ git checkout main
 git merge --no-ff email-field
 git push origin main
 ```
-The command *git merge --no-ff email-field* was used to merge the email-field branch with the main branch, and 
+The command ``git merge --no-ff email-field`` was used to merge the email-field branch with the main branch, and 
 avoid creating a merge commit, thus using the no fast-forward option.
 Before merging, a command to pull the changes made to the remote repository could be executed, to avoid merging
 conflicts. However, as there is only one collaborator in this project, this step was not necessary.
@@ -304,6 +306,42 @@ As this stage marked the completion of the second part of this class assignment,
 git tag -a ca1-part2 -m "implemented e-mail field and verification"
 git push origin ca1-part2
 ```
+
+## Alternative Version Control System 
+
+### Subversion
+Subversion (SVN) is a centralized version control system frequently used to manage and track changes to files in software development
+projects. SVN uses a central server to store all the files and enables team members to check out files from the server, make changes
+and then commit them back to the server.
+
+### Differences between Git and Subversion
+
+ **1. Distributed vs Centralized:**
+
+While Git is a distributed version control system, meaning that each user has a complete copy of the repository, Subversion is a
+centralized version control system, meaning that there is only one single central repository that contains all the files.
+
+ **2. Branching and Merging:**
+
+Git allows for easy and straightforward branching and merging. In fact, branching is an important part of the workflow, and merging
+is a common operation. Subversion also supports branching and merging, where branches consist essentially in copies of the entire repository, 
+making the process more complex and less flexible.
+
+ **3. Performance:**
+
+Git is commonly considered faster, specially when considering operations such as branching and merging. Subversion, on the other hand,
+while efficient, it may not be as fast as Git, specially when dealing with large repositories.
+
+ **4. Offline Work:**
+
+Git allows offline work as each user has a complete copy of the repository (local repository), and can commit changes locally before pushing
+them to the central (remote) repository. On the other hand, Subversion requires a network connection to the central repository to commit changes.
+
+ **5. Atomic Commits:**
+
+Git commits are atomic, which means all changes in a commit must be applied or none of them are. However, with Subversion, commits are not atomic
+by default, and it is possible to commit only a part of the changes in a working copy, which may lead to inconsistencies.
+
 
 
 

@@ -1,13 +1,13 @@
 package com.greglturnquist.payroll;
 
+import com.greglturnquist.payroll.Employee;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EmployeeTest {
-
     @Test
     public void createEmployee() throws InstantiationException {
         // arrange
