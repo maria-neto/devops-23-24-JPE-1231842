@@ -23,27 +23,38 @@ well as a brief explanation of each one.
 
 ### Initializing the repository
 
- 1. Initialize the repository:
+ 1. Create README.md file:
+```bash
+echo "# devops-23-24-JPE-1231842" >> README.md
+```
+This step is not mandatory but it is a good practice to create a README.md file to provide a brief description of the project.
+
+ 2. Initialize the repository:
 ```bash 
 git init
 ```
- 2. Add a first version of the README.md file to the staging area:
+
+ 3. Add a first version of the README.md file to the staging area:
 ```bash
 git add README.md
 ```
- 3. Commit the changes made to the README.md file:
+
+ 4. Commit the changes made to the README.md file:
 ```bash
 git commit -m "first commit"
 ```
- 4. Rename the master branch to main branch:
+
+ 5. Rename the master branch to main branch:
 ```bash
 git branch -M main
 ```
- 5. Add remote repository, previously created on GitHub, to the local repository:
+
+ 6. Add remote repository to the local repository:
 ```bash
 git remote add origin https://github.com/maria-neto/devops-23-24-JPE-1231842.git
 ```
- 6. Finally, push all the changes made to the remote repository:
+
+ 7. Finally, push all the changes made to the remote repository:
 ```bash
 git push -u origin main
 ```
@@ -60,14 +71,17 @@ available on the local machine, the following commands were used to add the proj
 ```bash
 git mv path/to/TutorialReact.js/And/Spring/Data/REST/Application/basic CA1
 ```
+
  2. Add the changes made to the staging area:
 ```bash
 git add CA1
 ```
+
  3. Commit the changes made to the repository:
 ```bash
 git commit -m "added folder CA1 with Tutorial React.js and Spring Data REST Application"
 ```
+
  4. Push the changes made to the remote repository:
 ```bash
 git push origin main
@@ -76,18 +90,19 @@ git push origin main
 ### Creating a tag for the first version of the project
  1. Create tag for the first version of the project, which includes a brief message:
 ```bash
-git tag -a v.1.1.0 -m "initial version"
+git tag -a v1.1.0 -m "initial version"
 ```
+
  2. Push the tag to the remote repository:
 ```bash
-git push origin v.1.1.0
+git push origin v1.1.0
 ```
 
 ### Adding a new feature to the project - Job Years field
 The original project was modified, specifically the Employee class, to include the number
 of years the employee has been working in the company. Also, a test package was created to
 add some unit tests to the project. Here is a brief example of the alternations
-that were introduced in the Employee class:
+that were introduced to the Employee class:
 ```java
     private int jobYears;
     
@@ -112,17 +127,19 @@ After these modifications were introduced, the following commands were used to a
 ```bash
 git add .
 ```
-This command was used as it was intended to add all the modification added, and commit them.
+This command was used as it was intended to add all the modification added before committing them.
 
  2. Commit the changes made to the repository:
 ```bash
 git commit -m "job years added to Employee class, class EmployeeTest created"
 ```
+
  3. Push the changes made to the remote repository:
 ```bash
 git push origin main
 ```
-A new tag was created to mark the addition of a new feature:
+
+ 4. A new tag was created to mark the addition of a new feature:
 ```bash
 git tag -a v1.2.0 -m "Job Years feature added and tested"
 git push origin v1.2.0
@@ -132,21 +149,22 @@ git push origin v1.2.0
 The Employee class was modified to include validation of its attributes. A method named
 areArgumentsValid was created in order to validate the first name, last name, description and
 job years. Here is a representation of the method, as well as its usage in the constructor:
+
 ```java
     private boolean areArgumentsValid(String firstName, String lastName, String description, int jobYears, String email) {
-        if( firstName == null || firstName.trim().isEmpty())
+        if(firstName == null || firstName.trim().isEmpty())
         return false;
-        if( lastName == null || lastName.trim().isEmpty())
+        if(lastName == null || lastName.trim().isEmpty())
         return false;
-        if( description == null || description.trim().isEmpty())
+        if(description == null || description.trim().isEmpty())
         return false;
-        if( jobYears < 0)
+        if(jobYears < 0)
         return false;
         return true;
         }
 
     public Employee(String firstName, String lastName, String description, int jobYears) throws InstantiationException {
-        if( !areArgumentsValid(firstName, lastName, description, jobYears, email) || !isEmailAddressValid(email))
+        if(!areArgumentsValid(firstName, lastName, description, jobYears, email))
         throw new InstantiationException("Invalid arguments");
         this.firstName = firstName;
         this.lastName = lastName;
@@ -154,9 +172,10 @@ job years. Here is a representation of the method, as well as its usage in the c
         this.jobYears = jobYears;
         }
 ```
+
 After all the alterations were implemented, the commands used previously were applied in order to commit
-and push the changes to the remote repository. An issue was created to keep track of the changes made to the project, and
-a reference to the issue (#2) was added to the commit message.
+and push the changes to the remote repository. Several **issues** were created to keep track of the changes made to the project, and
+a reference to the issue, in this case issue #2, was added to the commit message.
 ```bash
 git add .
 git commit -m "#2 created methods to validate arguments"
@@ -176,15 +195,17 @@ For this project, the addition of an e-mail field was required to the attributes
 the new branch was named after the feature being developed, in this case, email-field.
 
 ### Creating a new branch
- 1. To create the new branch (while in the main branch), the following command was applied:
+ 1. Creation of a new branch (while in the main branch), identified as email-field:
 ```bash
 git branch email-field
 ```
- 2. Command to switch from the main branch to the email-field branch:
+
+ 2. Switch from the main branch to the email-field branch:
 ```bash
 git checkout email-field
 ```
- 3. Command to push the changes made to the remote repository:
+
+ 3. Push the changes made to the remote repository:
 ```bash
 git push -u origin email-field
 ```
@@ -193,6 +214,7 @@ git push -u origin email-field
 As it was requested, a new feature was added to the project, concerning the e-mail address of the employee.
 In this stage, simple validations were introduced (e.g. the e-mail address cannot be null or empty), and a
 few new unit tests were added. Below is a representation of the changes made to the Employee class.
+
 ```java
     private String email;
 
@@ -228,9 +250,11 @@ few new unit tests were added. Below is a representation of the changes made to 
         this.email = email;
         }
 ```
-After all the alteration were implemented, they were committed, the email-field branch was merged with
+
+After all the alterations were implemented, they were committed, the email-field branch was merged with
 the main branch, and was pushed to the remote repository. These modification were related to some previously
 created issues, so those were referenced in the commit message.
+
 ```bash
 git add .
 git commit -m "#3 email attribute created in Employee class, get and set methods added, tests updated in EmployeeTest"
@@ -238,6 +262,7 @@ git checkout main
 git merge --no-ff email-field
 git push origin main
 ```
+
 The command ``git merge --no-ff email-field`` was used to merge the email-field branch with the main branch, and 
 avoid creating a merge commit, thus using the no fast-forward option.
 Before merging, a command to pull the changes made to the remote repository could be executed, to avoid merging
@@ -254,6 +279,7 @@ The project was further modified to include a more thorough validation of e-mail
 A new method named isEmailAddressValid was created to verify if the e-mail address is valid and 
 regarding its composition (verification of the presence of the '@' and '.' characters, in the correct order).
 To do so, a new branch was created, named fix-invalid-email, and the new feature was developed in this branch.
+
 ```bash
 git branch fix-invalid-email
 git checkout fix-invalid-email
@@ -287,6 +313,7 @@ Here is a representation of the feature implementation:
         }
     }
 ```
+
 For the development of the isEmailAddressValid method, the regular expression was obtained from this [reference](https://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method).
 After completing the implementation of this new feature and adding some unit tests, the commands used previously in the
 development of the email-field feature were applied to commit and push the changes to the remote repository.
@@ -311,7 +338,7 @@ git push origin ca1-part2
 
 ### Subversion
 Subversion (SVN) is a centralized version control system frequently used to manage and track changes to files in software development
-projects. SVN uses a central server to store all the files and enables team members to check out files from the server, make changes
+projects. SVN uses a central server to store all the files and allows team members to check out files from the server, make changes
 and then commit them back to the server.
 
 ### Differences between Git and Subversion
@@ -343,14 +370,16 @@ Git commits are atomic, which means all changes in a commit must be applied or n
 by default, and it is possible to commit only a part of the changes in a working copy, which may lead to inconsistencies.
 
 
-### Analysis an implementation using Subversion
+### Analysis of an implementation using Subversion
 In order to further understand the differences between Git and Subversion, an example of implementation using Subversion was analyzed.
 
 #### Creating a new repository
+
 1. Create the repository:
 ```bash 
 svnadmin create /path/to/repository
 ```
+
 2. Checkout remote repository to local working directory:
 ```bash
 svn checkout file:///path/to/repository/trunk /path/to/working/directory
@@ -361,6 +390,7 @@ In this command, the term *trunk* refers to the main development branch of the r
 ```bash
 svn add README.md
 ```
+
 4. Commit the changes made to the README.md file:
 ```bash
 svn commit -m "README.md file added to the repository"
@@ -375,6 +405,7 @@ since the last update.
 
 #### Tagging a version of the project
 First, the user should navigate to the root of the working directory, and then create a tag marking the current version of the project.
+
 ```bash
 cd /path/to/working/directory
 svn copy trunk tags/v1.1.0 -m "initial version"
@@ -382,6 +413,7 @@ svn copy trunk tags/v1.1.0 -m "initial version"
 
 #### Adding a new feature to the project using a new branch
 To add a new feature to the project, a new branch was created, named *email-field*.
+
 ```bash
 svn mkdir branches/email-field -m "new branch to add email field"
 ```
@@ -411,6 +443,12 @@ Finally, the user should commit the changes made to the trunk.
 ```bash
 svn commit -m "new feature merged into trunk"
 ```
+
+### Conclusion
+In conclusion, Git and Subversion are both version control systems that allow users to manage and track changes to files in software development
+projects. However, they have some differences in terms of their architecture, branching and merging capabilities, performance, offline work, and atomic
+commits. While Subversion may be more suitable for smaller projects and users with less experience, Git is more flexible and efficient, and is
+commonly used in larger projects, allowing for a more complex and distributed workflow.
 
 
 
