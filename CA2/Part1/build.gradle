@@ -75,3 +75,12 @@ task backupSource(type:Copy){
     from '/src'
     into '/backup'
 }
+
+task zipSource(type:Zip){
+    group = "DevOps"
+    description = "Zip the source code"
+
+    from '/src'
+    archiveBaseName.set("source")
+    archiveExtension.set("zip")
+}
