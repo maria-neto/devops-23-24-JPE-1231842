@@ -176,7 +176,7 @@ The class assignment required the addition of a new task to copy the source file
 in the application's root directory.
 
 ```groovy
-task backupSource(type:Copy){
+task backupSourceFiles(type:Copy){
     group = "DevOps"
     description = "Copy the source code to the backup directory"
 
@@ -185,7 +185,7 @@ task backupSource(type:Copy){
 }
 ```
 
-The task was named *backupSource* and it was of type Copy, which is a task type provided by the Gradle build system to copy files.
+The task was named *backupSourceFiles* and it was of type Copy, which is a task type provided by the Gradle build system to copy files.
 The task was then run independently to check if the backup directory was created and the source files were successfully copied.
 
 ```gradle
@@ -201,18 +201,19 @@ git push origin main
 ```
 
 ### Task 3: Addition of a task to zip the source files
-The last task added to the project was to create an archive of the source files for the application. The task was named *zipSource* and it
+The last task added to the project was to create an archive of the source files for the application. The task was named *zipSourceFiles* and it
 was of type Zip, which is a task type provided by the Gradle build system to create zip files.
 
 ```groovy
-task zipSource(type:Zip){
+task zipSourceFiles(type:Zip){
     group = "DevOps"
-    description = "Zip the source code"
+    description = "Create an archive of the source code"
 
     from '/src'
     archiveBaseName.set("source")
     archiveExtension.set("zip")
 }
+
 ```
 
 The task was then run independently to check if the zip file was created successfully.
