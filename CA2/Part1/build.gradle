@@ -68,7 +68,7 @@ task runServer(type:JavaExec, dependsOn: classes){
 
     args '59001'
 }
-task backupSource(type:Copy){
+task backupSourceFiles(type:Copy){
     group = "DevOps"
     description = "Copy the source code to the backup directory"
 
@@ -76,11 +76,3 @@ task backupSource(type:Copy){
     into '/backup'
 }
 
-task zipSource(type:Zip){
-    group = "DevOps"
-    description = "Zip the source code"
-
-    from '/src'
-    archiveBaseName.set("source")
-    archiveExtension.set("zip")
-}
