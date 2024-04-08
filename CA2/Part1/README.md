@@ -13,8 +13,7 @@ in the DevOps repository, which were then associated with the commits made to im
 
 ## First Steps
 
- 1. Cloning the repository
-To complete this assignment, the first step is to clone the repository from this [link](https://bitbucket.org/pssmatos/gradle_basic_demo/) to the local machine,
+ 1. Cloning the repository: in order to complete this assignment, the first step is to clone the repository from this [link](https://bitbucket.org/pssmatos/gradle_basic_demo/) to the local machine,
 as it will provide the basic structure of the project and the necessary files to work on.
 
 
