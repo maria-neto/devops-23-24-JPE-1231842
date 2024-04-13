@@ -45,8 +45,8 @@ task copyJarFiles(dependsOn: build) {
 	}
 }
 
-task deleteWebpackFiles(type: Delete) {
-	delete 'src/main/resources/static/built'
+task deleteWebpackFiles(dependsOn: clean) {
+	doLast {
+		delete 'src/main/resources/static/built'
+	}
 }
-
-clean.dependsOn deleteWebpackFiles
