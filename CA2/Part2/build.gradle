@@ -35,10 +35,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task copyJar(type: Copy, dependsOn: build) {
-	from 'build/libs/'
-	into 'dist'
-	include '*.jar'
+task copyJarFiles(dependsOn: build) {
+	doLast {
+		copy {
+			from 'build/libs/'
+			into 'dist'
+			include '*.jar'
+		}
+	}
 }
 
 task deleteWebpackFiles(type: Delete) {
