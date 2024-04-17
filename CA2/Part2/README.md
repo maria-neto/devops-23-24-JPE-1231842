@@ -18,7 +18,7 @@ git branch tut-basic-gradle
 git checkout tut-basic-gradle
 ```
 
-3. To generate a new gradle Spring Boot project, it was necessary to access the following [website](https://start.spring.io/), and fill in the necessary information
+3. To generate a new Gradle Spring Boot project, it was necessary to access the following [website](https://start.spring.io/), and fill in the necessary information
    and add all the required dependencies, as illustrated by the picture below.
 
 ![img.png](img.png)
@@ -173,3 +173,132 @@ git checkout main
 git merge --no-ff tut-basic-gradle
 git push
 ```
+
+## Implementing an alternative solution: Maven
+
+A possible alternative solution to this assignment could be the use of a different build automation tool, in this case, Maven was the build tool chosen.
+Maven is a build automation tool used mainly for Java projects, where the project structure as well as dependencies and plugins are defined in a XML file.
+In order to achieve the same goals that were achieved using Gradle, a Maven Spring Boot project was generated in the following [website](https://start.spring.io/).
+The only difference between this alternative and the Gradle implementation would be the build tool chosen. All the other aspects, including dependencies (Rest Repository,
+Thymeleaf, Spring Data JPA, H2 Database) were the same, and the generated project included the chosen dependencies in its pom.xml file.
+
+To complete the rest of the assignment using Maven, the src directory was deleted and replaced with *CA1/basic/src* directory. *CA1/basic/webpack.config.js* and *CA1/basic/package.json*
+were also added to the project's root, and the *CA2/Part2-Maven/src/main/resources/static/built* was deleted.
+
+After finishing all these steps, the frontend plugin, the equivalent to the copyJarFiles task and the deleteWebpacksFiles task were added to the pom.xml file of this project.
+
+ 1. Addition of the frontend plugin:
+```xml
+<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<configuration>
+					<installDirectory>target</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v12.14.0</nodeVersion>
+							<npmVersion>6.13.4</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>webpack build</id>
+						<goals>
+							<goal>webpack</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+```
+
+ 2. Addition of the copyJar plugin to copy the project .jar files and add them to a dist directory:
+```xml
+<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>copy-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/dist</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>*.jar</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+```
+
+ 3. Addition of a clean plugin to delete the webpack files generated:
+```xml
+<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}/src/main/resources/static/built</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+ ```
+
+After adding all the desired plugins to the pom.xml file, the project was built to check if everything was working correctly.
+```bash
+mvn compile
+```
+
+To verify if the application was generating the frontend files correctly, the following command was used:
+```bash
+mvn spring-boot:run
+```
+
+To run the clean plugin independently and clean the webpack files, the following command was used:
+```bash
+mvn clean
+```
+
+These commands could also be applied using Maven wrapper, which would be the equivalent to the Gradle wrapper.
+
+In conclusion, both Gradle and Maven are powerful build automation tools used primarily for Java projects. They both offer a wide range of features
+and capabilities that can cater to different project requirements. Maven, with its convention-over-configuration approach, provides a standardized
+and straightforward way of building projects. It uses an XML-based configuration file and has a well-defined lifecycle, making it easier for new
+developers to understand and use.  On the other hand, Gradle offers more flexibility and control over the build process. It uses a Groovy-based DSL
+for its configuration files, which can be more expressive and easier to read than XML. Gradle also offers performance advantages, such as incremental
+builds and build caching, which can significantly speed up build times.  Choosing between Gradle and Maven often comes down to the specific needs of the
+project and the preferences of the development team. Both tools have strong community support and extensive plugin ecosystems, making them suitable for a
+wide range of projects.
+
+
+
+

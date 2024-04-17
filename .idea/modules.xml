@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DevOpsRepository.iml" filepath="$PROJECT_DIR$/.idea/DevOpsRepository.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CA1/basic/react-and-spring-data-rest-basic.iml" filepath="$PROJECT_DIR$/CA1/basic/react-and-spring-data-rest-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CA2/Part2-Maven/react-and-spring-data-rest-basic (2).iml" filepath="$PROJECT_DIR$/CA2/Part2-Maven/react-and-spring-data-rest-basic (2).iml" />
     </modules>
   </component>
 </project>
