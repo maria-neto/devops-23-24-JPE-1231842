@@ -101,7 +101,7 @@ For this part of the assignment, the goal was to add the frontend plugin to the 
 ```bash
 ./gradlew bootRun
 ```
-After the addition and configuration of the frontend plugin, the result webpage should display a result similar to the one in the picture below:
+After the addition and configuration of the frontend plugin, the result [webpage](http://localhost:8080) should display a result similar to the one in the picture below:
 ![img_1.png](img_1.png)
 
 7. After all the changes were successfully implemented, the project was committed to the remote repository.
@@ -282,22 +282,37 @@ To verify if the application was generating the frontend files correctly, the fo
 ```bash
 mvn spring-boot:run
 ```
+At this point, if everything was working correctly, the result should be similar to the one presented when building the project using Gradle.
 
 To run the clean plugin independently and clean the webpack files, the following command was used:
 ```bash
 mvn clean
 ```
+These commands could also be applied using Maven wrapper, which would be the equivalent to usage of Gradle wrapper.
 
-These commands could also be applied using Maven wrapper, which would be the equivalent to the Gradle wrapper.
+In conclusion, both Gradle and Maven are powerful build automation tools. They both offer a large range of features
+and capabilities that can provide an answer to different project requirements.
+Maven provides a standardized and straightforward way of building projects, as it uses an XML-based configuration 
+file and has a well-defined lifecycle, making it easier to understand and use.
+On the other hand, Gradle offers more flexibility and control over the build process. It uses a Groovy-based DSL
+for its configuration files, which can be more expressive and easier to read than XML.
+In this assignment, both tools were used to achieve the same goals, and both were able to provide the desired results.
 
-In conclusion, both Gradle and Maven are powerful build automation tools used primarily for Java projects. They both offer a wide range of features
-and capabilities that can cater to different project requirements. Maven, with its convention-over-configuration approach, provides a standardized
-and straightforward way of building projects. It uses an XML-based configuration file and has a well-defined lifecycle, making it easier for new
-developers to understand and use.  On the other hand, Gradle offers more flexibility and control over the build process. It uses a Groovy-based DSL
-for its configuration files, which can be more expressive and easier to read than XML. Gradle also offers performance advantages, such as incremental
-builds and build caching, which can significantly speed up build times.  Choosing between Gradle and Maven often comes down to the specific needs of the
-project and the preferences of the development team. Both tools have strong community support and extensive plugin ecosystems, making them suitable for a
-wide range of projects.
+After completing the Maven implementation, the project was committed to the remote repository.
+```bash
+git add .
+git commit -m "close #20 - added alternative implementation using Maven"
+git push origin main
+```
+
+As this marked the completion of CA2, Part 2, a new tag was created.
+```bash
+git tag -a ca2-part2 -m "CA2 Part2 completed"
+git push origin ca2-part2
+```
+
+
+
 
 
 
