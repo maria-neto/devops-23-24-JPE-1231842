@@ -4,7 +4,7 @@
 
 In the second part of this assignment, the goal was to use the DevOps repository and use a basic Gradle application to introduce some new and simple features,
 which would help to understand how the gradle wrapper works and how to edit the build.gradle file to add new tasks and dependencies. For each new task or feature
-added, issues were created in the DevOps repository, which were then associated with the commits made to implement said feature.
+added, issues were created, which were later associated with the commits made to implement said feature.
 
 ## Setting up the project
 
@@ -18,20 +18,25 @@ git branch tut-basic-gradle
 git checkout tut-basic-gradle
 ```
 
-3. To generate a new Gradle Spring Boot project, it was necessary to access the following [website](https://start.spring.io/), and fill in the necessary information
+3. In order to generate a new Gradle Spring Boot project, it was necessary to access the following [website](https://start.spring.io/), and fill in the necessary information
    and add all the required dependencies, as illustrated by the picture below.
 
 ![img.png](img.png)
 
 4. After generating the project, it was necessary to extract the zip file inside the CA2/Part2 directory.
 
+
 5. The next step was to delete the *src* directory as it was not necessary for this assignment.
 
-6. Copy the *CA1/basic/src* directory to the root of the project, as well as the *CA1/basic/webpack.config.js* and *CA1/basic/package.json* files.
 
-7. Delete the *CA2/Part2/src/main/resources/static/built* directory.
+6. A copy the *CA1/basic/src* directory was made in the project's root. *CA1/basic/webpack.config.js* and *CA1/basic/package.json* files were copied as well.
+
+
+7. *CA2/Part2/src/main/resources/static/built* directory was deleted.
+
 
 8. It was necessary to update the all imports regarding persistence in *CA2/Part2/src/main/java/com/greglturnquist/payroll/Employee.java* from *javax.persistence* to *jakarta.persistence*.
+
 
 9. After completing the previous steps, the project was built to check if everything was working correctly.
 ```bash
@@ -43,7 +48,7 @@ git checkout tut-basic-gradle
 ./gradlew bootRun
 ```
 This command would start the Spring Boot application, and it was possible to access it through the following [URL](http://localhost:8080/).
-At this point, the result webpage should be empty, as the frontend plugin was not added yet to the project.
+At this point, the result webpage should be empty, as the frontend plugin was not yet added to the project.
 
 11. After completing the previous steps, all the changes were committed to the remote repository.
 
@@ -57,7 +62,7 @@ git push origin tut-basic-gradle
 
 ### Part 1: Addition of the frontend plugin
 
-For this part of the assignment, the goal was to add the frontend plugin to the project, which would allow the project to build the frontend code using npm and webpack.
+For this part of the assignment, the goal was to add the frontend plugin to the project, which would allow the project to build the frontend code.
 
 1. The first step was to add the frontend plugin to the *build.gradle* file.
 ```groovy
@@ -182,7 +187,7 @@ In order to achieve the same goals that were achieved using Gradle, a Maven Spri
 The only difference between this alternative and the Gradle implementation would be the build tool chosen. All the other aspects, including dependencies (Rest Repository,
 Thymeleaf, Spring Data JPA, H2 Database) were the same, and the generated project included the chosen dependencies in its pom.xml file.
 
-To complete the rest of the assignment using Maven, the src directory was deleted and replaced with *CA1/basic/src* directory. *CA1/basic/webpack.config.js* and *CA1/basic/package.json*
+To complete the rest of the assignment using Maven, the src directory was deleted and replaced with a copy of the *CA1/basic/src* directory. *CA1/basic/webpack.config.js* and *CA1/basic/package.json*
 were also added to the project's root, and the *CA2/Part2-Maven/src/main/resources/static/built* was deleted.
 
 After finishing all these steps, the frontend plugin, the equivalent to the copyJarFiles task and the deleteWebpacksFiles task were added to the pom.xml file of this project.
