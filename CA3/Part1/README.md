@@ -7,12 +7,8 @@ Virtualization is a way to separate the software from the hardware, allowing the
 physical machine. Virtualization can be used to create a virtual machine (VM) that acts like a real computer with an operating system. The VM can be
 used to run software that is not compatible with the host operating system or to test software in different environments.
 
-In this assignment, the main goal is to understand and apply the concepts of virtualization using VirtualBox and Vagrant, where the students will migrate and run
-the projects from previous assignments in a virtualized environment.
-
-Vagrant is a tool that allows the user to create and configure lightweight, reproducible, and portable development environments. Vagrant uses a simple configuration
-file to define the software and resources needed to create a virtual machine. The user can use the same configuration file to create the same environment on different
-machines, making it easier to share and collaborate on projects.
+In this assignment, the main goal is to understand and apply the concepts of virtualization, where the students will migrate and run the projects from 
+previous assignments in a virtualized environment.
 
 VirtualBox is a free, open-source virtualization software that allows the user to create and run virtual machines on a host operating system. VirtualBox can be used
 to run multiple operating systems on a single physical machine, making it easier to test software in different environments.
