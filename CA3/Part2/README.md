@@ -30,8 +30,9 @@ config.vm.box = "ubuntu/focal64"
 config.ssh.insert_key = false
 ```
 
- The `config.vm.box` setting defines the base box to use for the virtual machine. In this case, the `ubuntu/focal64` box was used, which is an official Ubuntu 20.04 LTS box. The `config.ssh.insert_key` setting is used 
- to disable the automatic insertion of the SSH key into the virtual machine. This setting is useful when using a custom SSH key for authentication, which is not being used in this assigment.
+ The `config.vm.box` setting defines the base box, which contains a pre-configured operating system image, as well as some default settings. These boxes can be developed for a variety of platforms and operating systems.
+ In this case, the `ubuntu/focal64` box was used, which is an official Ubuntu 20.04 LTS box, compatible with VirtualBox. The `config.ssh.insert_key` setting is used to disable the automatic insertion of the SSH key into the virtual machine. This 
+ setting is useful when using a custom SSH key for authentication.
  
 
  ### 2. Common Provisioning 
@@ -87,6 +88,16 @@ SHELL
         
  The `db.vm.provision` setting is used to define the provisioning settings for the virtual machine. In this case, a shell script is used to download the H2 database jar file.
  The `wget` command is used to download the H2 database jar file from the Maven repository.
+
+This section provides a script to run the H2 server process. 
+```ruby
+db.vm.provision "shell", :run => 'always', inline: <<-SHELL
+java -cp ./h2*.jar org.h2.tools.Server -web -webAllowOthers -tcp -tcpAllowOthers -ifNotExists > ~/out.txt &
+SHELL
+end
+```
+
+The `java` command is used to run the H2 server process, specifying the classpath, server options, and output file.
  
 
  ### 4. WebServer Virtual Machine Configuration
@@ -113,7 +124,8 @@ This section defines the resource allocation settings for the webserver virtual 
    end
 ```
 
-The `web.vm.provider` setting is used to define the provider-specific settings for the virtual machine. In this case, the `virtualbox` provider is used to define the memory allocation settings. The `vb.memory` setting is used to define the amount of memory to allocate to the virtual machine. In this case, 1024 MB of memory was allocated.
+The `web.vm.provider` setting is used to define the provider-specific settings for the virtual machine. In this case,
+the `virtualbox` provider was used. The `vb.memory` setting is used to define the amount of memory to allocate to the virtual machine. In this case, 1024 MB of memory were allocated.
 
  **4.2 Port Forwarding**
 
@@ -133,7 +145,7 @@ The `web.vm.network` setting with the `forwarded_port` option is used to define 
   # sudo apt-get install nodejs -y
   # sudo apt-get install npm -y
   # sudo ln -s /usr/bin/nodejs /usr/bin/node
-  sudo apt install -y tomcat9 tomcat9-admin
+  # sudo apt install -y tomcat9 tomcat9-admin
   # If you want to access Tomcat admin web page do the following:
   # Edit /etc/tomcat9/tomcat-users.xml
   # uncomment tomcat-users and add manager-gui to tomcat user
@@ -150,19 +162,96 @@ The `web.vm.network` setting with the `forwarded_port` option is used to define 
   end
  ```
 
-In this section, the provisioning settings for the webserver virtual machine are defined. A shell script is used to install the Tomcat server, clone the project repository, build the project, and run the web server. 
-The `sudo apt install -y tomcat9 tomcat9-admin` command is used to install the Tomcat server and the Tomcat admin package.
-The `git clone` command is used to clone the project repository from GitHub. 
-The `./gradlew clean build` command is used to build the project using the Gradle Wrapper. 
-The `timeout 2m ./gradlew bootRun` command is used to run the web server using the Gradle Wrapper. 
-The `timeout` command is used to set a time limit for the execution of the command, ensuring it stops running after 2 minutes.
+In this section, the provisioning settings for the webserver virtual machine are defined. A shell script is used to clone the project repository, build the project, and run the web server. 
+The `sudo apt install -y tomcat9 tomcat9-admin` command could be used to install the Tomcat server and the Tomcat admin package. However, it was commented out in this case, as the project uses 
+Spring Boot to run the web server. The `git clone` command is used to clone the project repository from GitHub. The `./gradlew clean build` command is used to build the project using the Gradle Wrapper. 
+The `timeout 2m ./gradlew bootRun` command is used to run the web server using the Gradle Wrapper. The `timeout` command is used to set a time limit for the execution of the command, ensuring it stops
+running after 2 minutes.
 
  ### 5. Running the Virtual Machines
 
  After defining the configuration settings in the Vagrant file, the virtual machines can be created and provisioned using the `vagrant up` command.
  The `vagrant up` command reads the Vagrant file, creates the virtual machines, and runs the provisioning scripts to install the necessary software packages and configure the virtual machines.
  Once the virtual machines are created and provisioned, the user can access the web server by opening a browser and navigating to the IP address of the web server virtual machine followed by the port number 8080.
- The user can also access the H2 database console by opening a browser and navigating to the IP address of the database virtual machine followed by the port number 8082 or 9092.
+ 
+
+## Hypervisor Alternative: Hyper-V
+
+For this class assignment, the chosen alternative hypervisor to VirtualBox was Hyper-V. Hyper-V is a virtualization product developed by Microsoft that allows the user to create and run different virtual machines.
+
+Hyper-V is a type 1 hypervisor, which is installed directly on the host server's hardware, runs on the host's hardware and is responsible for accessing the physical resources such as CPU, memory and storage.
+On the other side, VirtualBox is a type 2 hypervisor, which is installed on an additional layer of a host operating system, creating an abstract layer between the host OS and the virtual machines.
+
+Regarding its architecture, Hyper-V is more efficient than VirtualBox, as it has direct access to the hardware, which allows it to run virtual machines with better performance and scalability. However, VirtualBox's architecture, 
+being a type 2 hypervisor, is more flexible and easier to use, as it can run on different operating systems and does not require a reboot to switch between the host and guest operating systems.
+
+Considering performance, Hyper-V's resource allocation, virtual processor support and memory management features are more robust and scalable, allowing it to run more demanding workloads with better performance than VirtualBox.
+However, VirtualBox can be more suitable for development and testing environments, where flexibility and ease of use are a priority.
+
+### Vagrant File for Hyper-V
+
+In order to adapt the Vagrant File for a different hypervisor, in this case, Hyper-V, some changes were introduced, namely the provider of the hypervisor and the base box chosen, which must be compatible
+with Hyper-V.
+
+```ruby
+Vagrant.configure("2") do |config|
+config.vm.box = "generic/ubuntu2004"
+config.ssh.insert_key = false
+```
+The main difference between this version and the one developed for VirtualBox is focused on the box that was selected, as *ubuntu/focal64* is a box for Ubuntu 20.04 for different hypervisors, but is not compatible with
+Hyper-V. For Hyper-V, the box chosen was *generic/ubuntu2004*, which was applied to both database and web virtual machines. 
+
+- The configuration for DB virtual machine was defined as follows:
+  ```ruby
+  config.vm.define "db" do |db|
+      db.vm.box = "generic/ubuntu2004"
+      db.vm.hostname = "db"
+      db.vm.network "private_network", ip: "192.168.56.11"
+  ```
+
+ - The web virtual machine was configured as follows:
+  ```ruby
+  config.vm.define "web" do |web|
+      web.vm.box = "generic/ubuntu2004"
+      web.vm.hostname = "web"
+      web.vm.network "private_network", ip: "192.168.56.10"
+  ```
+
+
+The other main difference is the provider of the hypervisor. In this example, the provider used for the web virtual machine was *hyperv* instead of *virtualbox*. Also, comparing to the Vagrant file used for VirtualBox,
+this one in addition to defining the amount of RAM memory allocated to the virtual machine, defines the number of CPUs allocated as well, in this specific case, two.
+
+```ruby
+web.vm.provider "hyperv" do |v|
+      v.memory = 1024
+      v.cpus = 2
+```
+
+Regarding the provisioning settings, the script used to clone the project repository, build the project, and run the web server was maintained, as it is compatible with Hyper-V.
+
+```ruby
+web.vm.provision "shell", inline: <<-SHELL, privileged: false
+# sudo apt install -y tomcat9 tomcat9-admin
+git clone https://github.com/maria-neto/devops-23-24-JPE-1231842.git
+cd devops-23-24-JPE-1231842/CA2/Part2
+chmod u+x gradlew
+./gradlew clean build
+timeout 2m ./gradlew bootRun
+SHELL
+end
+```
+
+## Conclusion
+
+This class assignment provided an opportunity to explore the concepts of virtualization using Vagrant, a tool that simplifies the process of creating and configuring virtual machines.
+The use of Vagrant significantly simplified the process of setting up and configuring the development environment, making more reproducible and more simple to share and collaborate on projects.
+Moreover, the comparison between different hypervisors, VirtualBox and Hyper-V, allowed to understand the differences between these hypervisors, as well as the advantages and disadvantages of each one.
+It also enabled a better comprehension of the configuration settings required for each hypervisor, as well as the adjustments required in the Vagrant file to make it compatible with different hypervisors.
+
+
+
+
+
 
 
 
