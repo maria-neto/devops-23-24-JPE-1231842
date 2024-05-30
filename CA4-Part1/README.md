@@ -10,7 +10,7 @@ inside the Docker image, and another where the chat server is built in the host 
 
 ## Building the Docker Image for the Chat Server (Version 1)
 
-To build the Docker image, the Dockerfile must be created. The Dockerfile is a text document that contains all the commands a user
+In order to build the Docker image, a Dockerfile must be created. The Dockerfile is a text document that contains all the commands a user
 could call on the command line to assemble an image. The Dockerfile used in the first version of this assignment, where the chat server is
 built directly inside the Docker image, is shown below:
 
@@ -61,7 +61,7 @@ docker run -p 59001:59001 chat-server:version1
 
 ## Building the Docker Image for the Chat Server (Version 2)
 
-In the second version of this assignment, the chat server is built in the host machine, and the resulting jar file is copied to the Docker image.
+In the second version of this assignment, the chat server is built in the host machine, and the resulting jar file is copied into the Docker image.
 The Dockerfile used in this version is shown below: 
 
 ```Dockerfile
@@ -102,7 +102,11 @@ docker run -p 59001:59001 chat-server:version2
 
 ## Conclusion
 
-
+In this assignment, the functionalities of Docker containers and images were explored, creating images and running containers using a simple
+chat application as an example. There were two different approaches to create a Docker image, one where the chat server is built inside the Docker image,
+and another where the chat server is built in the host machine and the resulting jar file is copied into the Docker image.
+This assignment emphasized the benefits of Docker in software development, such as packaging an application with all its dependencies into a single package, 
+ensuring consistent operation across different environments.
 
 
 
