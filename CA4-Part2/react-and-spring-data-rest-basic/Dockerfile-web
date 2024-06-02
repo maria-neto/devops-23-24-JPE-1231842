@@ -1,0 +1,10 @@
+FROM gradle:jdk21
+
+WORKDIR /app
+
+COPY . /app
+
+RUN gradle clean build
+
+ ENTRYPOINT ["gradle"]
+ CMD ["bootRun"]
