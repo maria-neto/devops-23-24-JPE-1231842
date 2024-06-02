@@ -61,7 +61,13 @@ docker run -p 59001:59001 chat-server:version1
 
 ## Building the Docker Image for the Chat Server (Version 2)
 
-In the second version of this assignment, the chat server is built in the host machine, and the resulting jar file is copied into the Docker image.
+In the second version of this assignment, the chat server is built in the host machine, and the resulting jar file is copied into the Docker image. So, in this version, to
+ensure that the chat server is built in the host machine and generates the required jar file, the following command must be executed in the project directory where the build.gradle file is located:
+
+```bash
+./gradlew clean build
+```
+
 The Dockerfile used in this version is shown below: 
 
 ```Dockerfile
