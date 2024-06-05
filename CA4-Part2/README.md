@@ -54,7 +54,7 @@ spring.h2.console.settings.web-allow-others=true
 The App.js file was also updated to include the following code:
 
 ```javascript
-	componentDidMount() { // <2>
+	componentDidMount(){ // <2>
     client({method: 'GET', path: '/basic-0.0.1-SNAPSHOT/api/employees'}).done(response => {
         this.setState({employees: response.entity._embedded.employees});
     });
@@ -147,7 +147,111 @@ For this assignment, the H2 database was tested by adding employees and the web 
 
 ![Upadted Web Application](FE_UpdatedTable.jpg)
 
+## Pushing the Docker Images to Docker Hub
+
+In order to push the created Docker images to Docker Hub, the user must log in to Docker Hub.
+After logging in, the following commands were executed to tag and push the Docker image for the web application:
+
+```bash
+docker tag ca4-part2:web <dockerhub-username>/ca4-part2-web
+docker push <dockerhub-username>/ca4-part2-web
+```
+
+The equivalent commands were executed for the Docker image for the H2 database:
+
+```bash
+docker tag ca4-part2:db <dockerhub-username>/ca4-part2-db
+docker push <dockerhub-username>/ca4-part2-db
+```
 
 ## Conclusion
 In this class assignment, Docker was used to create two images, one for the web application and another for the H2 database, and a docker-compose file was created to run a container with both images and connect them.
 This assignment demonstrated how Docker can be used to containerize applications and services, making it easier to deploy and manage them in different environments.
+
+## Alternative Implementation Solution: Kubernetes
+
+An alternative solution to running the web application and the H2 database would be to use Kubernetes, which is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+Kubernetes provides a more robust and scalable solution for running containers in production environments, as it allows for the deployment of multiple containers across multiple nodes in a cluster.
+After pushing the developed Docker images to Docker Hub, a Kubernetes deployment file could be created to deploy the web application and the H2 database as separate pods in a Kubernetes cluster.
+The deployment file would specify the Docker images to use, the number of replicas for each pod, and any other configuration settings required for the deployment. A Service file could also be created to provide networking support for the pods, 
+allowing them to communicate with each other. Kubernetes would then automatically create and manage the pods, ensuring that the web application and the H2 database are running and accessible.
+
+ - #### Deployment File for the Web Application and Service File
+
+```yaml
+# Deployment for the web application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ca4-part2-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ca4-part2-web
+  template:
+    metadata:
+      labels:
+        app: ca4-part2-web
+    spec:
+      containers:
+      - name: ca4-part2-web
+        image: <dockerhub-username>/ca4-part2-web
+        ports:
+        - containerPort: 8080
+
+# Service for the web application
+apiVersion: v1
+kind: Service
+metadata:
+  name: ca4-part2-web
+spec:
+  selector:
+    app: ca4-part2-web
+  ports:
+      port: 80
+      targetPort: 8080
+  type: NodePort
+```
+
+ - #### Deployment File for the H2 Database and Service File
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ca4-part2-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ca4-part2-db
+  template:
+    metadata:
+      labels:
+        app: ca4-part2-db
+    spec:
+      containers:
+      - name: ca4-part2-db
+        image: <dockerhub-username>/ca4-part2-db
+        ports:
+        - containerPort: 8082
+        - containerPort: 9092
+
+# Service for the web application
+apiVersion: v1
+kind: Service
+metadata:
+  name: ca4-part2-db
+spec:
+  selector:
+    app: ca4-part2-db
+  ports:
+    - name: web
+      port: 8082
+      targetPort: 8082
+    - name: tcp
+      port: 9092
+      targetPort: 9092
+  type: NodePort
+```
