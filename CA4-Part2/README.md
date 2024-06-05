@@ -153,15 +153,15 @@ In order to push the created Docker images to Docker Hub, the user must log in t
 After logging in, the following commands were executed to tag and push the Docker image for the web application:
 
 ```bash
-docker tag ca4-part2:web <dockerhub-username>/ca4-part2-web
-docker push <dockerhub-username>/ca4-part2-web
+docker tag react-and-spring-data-rest-basic-web 1231842/ca4-part2-web
+docker push 1231842/ca4-part2-web
 ```
 
 The equivalent commands were executed for the Docker image for the H2 database:
 
 ```bash
-docker tag ca4-part2:db <dockerhub-username>/ca4-part2-db
-docker push <dockerhub-username>/ca4-part2-db
+docker tag react-and-spring-data-rest-basic-db 1231842/ca4-part2-db
+docker push 1231842/ca4-part2-db
 ```
 
 ## Conclusion
@@ -217,6 +217,7 @@ spec:
  - #### Deployment File for the H2 Database and Service File
 
 ```yaml
+# Deployment for the H2 database
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -238,7 +239,7 @@ spec:
         - containerPort: 8082
         - containerPort: 9092
 
-# Service for the web application
+# Service for the H2 database
 apiVersion: v1
 kind: Service
 metadata:
