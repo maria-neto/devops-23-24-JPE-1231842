@@ -1,30 +1,35 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checking out...'
-                git 'https://github.com/maria-neto/devops-23-24-JPE-1231842'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                sh './gradlew clean assemble'
-            }
-        }
-        stage('Testing') {
-            steps {
-                echo 'Testing...'
-                sh './gradlew test'
-            }
-        }
-        stage('Archiving') {
-            steps {
-                echo 'Archiving...'
-                archiveArtifacts 'build/distributions/*'
-            }
-        }
-    }
+     agent any
+     stages {
+         stage('Checkout') {
+             steps {
+                 echo 'Checking out...'
+                 git 'https://github.com/maria-neto/devops-23-24-JPE-1231842'
+             }
+         }
+         stage('Build') {
+             steps {
+                 dir('CA2/Part1') {
+                     echo 'Building...'
+                     sh './gradlew clean assemble'
+                 }
+             }
+         }
+         stage('Testing') {
+             steps {
+                 dir('CA2/Part1') {
+                     echo 'Testing...'
+                     sh './gradlew test'
+                 }
+             }
+         }
+         stage('Archiving') {
+             steps {
+                 dir('CA2/Part1') {
+                     echo 'Archiving...'
+                     archiveArtifacts 'build/distributions/*'
+                 }
+             }
+         }
+     }
  }
