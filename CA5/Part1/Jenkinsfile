@@ -4,7 +4,7 @@ pipeline {
          stage('Checkout') {
              steps {
                  echo 'Checking out...'
-                 git 'https://github.com/maria-neto/devops-23-24-JPE-1231842'
+                 git 'https://github.com/maria-neto/devops-23-24-JPE-1231842.git'
              }
          }
          stage('Build') {
@@ -15,19 +15,23 @@ pipeline {
                  }
              }
          }
-         stage('Testing') {
+         stage('Test') {
              steps {
                  dir('CA2/Part1') {
                      echo 'Testing...'
                      sh './gradlew test'
                  }
              }
+             post {
+                 always {
+                     junit '**/build/test-results/**/*.xml'
+                 }
+             }
          }
-         stage('Archiving') {
+         stage('Archive') {
              steps {
-                 dir('CA2/Part1') {
-                     echo 'Archiving...'
-                     archiveArtifacts 'build/distributions/*'
+                 echo 'Archiving...'
+                 archiveArtifacts '**/build/libs/*.jar'
                  }
              }
          }
