@@ -9,6 +9,16 @@
       <sourceFolder url="file://$MODULE_DIR$/CA2/Part1/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/CA2/Part2/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CA2/Part2/src/test/java1" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/Part1/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/Part1/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/version2/gradle-basic-demo/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/version2/gradle-basic-demo/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/version2/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/version2/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part2/react-and-spring-data-rest-basic/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part2/react-and-spring-data-rest-basic/src/test/java1" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/version1/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CA4-Part1/version1/src/test/java" isTestSource="true" />
     </content>
     <content url="file://$MODULE_DIR$/CA2/Part2/dist" />
     <orderEntry type="inheritedJdk" />
