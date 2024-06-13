@@ -1,27 +1,29 @@
 pipeline {
      agent any
+
      stages {
          stage('Checkout') {
              steps {
                  echo 'Checking out...'
-                 git 'https://github.com/maria-neto/devops-23-24-JPE-1231842.git'
+                 git branch: 'main', url: 'https://github.com/maria-neto/devops-23-24-JPE-1231842.git'
              }
          }
-         stage('Build') {
+         stage('Assemble') {
              steps {
+                 echo 'Assembling...'
                  dir('CA2/Part1') {
-                     echo 'Building...'
-                     sh './gradlew clean assemble'
+                 sh 'chmod +x gradlew'
+                 sh './gradlew clean assemble'
                  }
              }
          }
          stage('Test') {
              steps {
-                 dir('CA2/Part1') {
-                     echo 'Testing...'
-                     sh './gradlew test'
-                 }
+             echo 'Testing...'
+             dir('CA2/Part1') {
+                 sh './gradlew test'
              }
+         }
              post {
                  always {
                      junit '**/build/test-results/**/*.xml'
@@ -30,8 +32,9 @@ pipeline {
          }
          stage('Archive') {
              steps {
-                 echo 'Archiving...'
-                 archiveArtifacts '**/build/libs/*.jar'
+             echo 'Archiving...'
+             dir('CA2/Part1') {
+                 archiveArtifacts 'build/libs/*.jar'
                  }
              }
          }
