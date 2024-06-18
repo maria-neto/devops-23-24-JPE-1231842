@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'c6fa4205-9585-4c45-8934-17e6fc3dd2ff'
-        DOCKER_IMAGE = '1231842/ca5-part2'
+        DOCKER_IMAGE = '1231842/ca5part2'
         DOCKER_TAG = "${env.BUILD_ID}"
     }
 
@@ -14,7 +14,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/maria-neto/devops-23-24-JPE-1231842.git'
             }
         }
-        
+
         stage('Set Permissions') {
             steps {
                 dir('CA2/part2') {
@@ -23,7 +23,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Assemble') {
             steps {
                 dir('CA2/Part2') {
@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Test') {
             steps {
                 dir('CA2/Part2') {
@@ -41,7 +41,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Javadoc') {
             steps {
                 dir('CA2/Part2') {
@@ -58,7 +58,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Archive') {
             steps {
                 dir('CA2/Part2') {
@@ -67,13 +67,13 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Create Dockerfile') {
             steps {
                 dir('CA2/Part2') {
                     script {
                         def dockerfileContent = """
-                        FROM openjdk:11-jre-slim
+                        FROM gradle:jdk21
                         WORKDIR /app
                         COPY build/libs/*.jar app.jar
                         EXPOSE 8080
@@ -84,7 +84,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Publish Image') {
             steps {
                 script {
