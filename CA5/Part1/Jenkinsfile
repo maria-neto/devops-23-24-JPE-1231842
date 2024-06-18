@@ -8,11 +8,18 @@ pipeline {
                  git branch: 'main', url: 'https://github.com/maria-neto/devops-23-24-JPE-1231842.git'
              }
          }
+         stage('Set Permissions') {
+             steps {
+                 echo 'Setting permissions...'
+                 dir('CA2/Part1') {
+                 sh 'chmod +x gradlew'
+                 }
+             }
+         }
          stage('Assemble') {
              steps {
                  echo 'Assembling...'
                  dir('CA2/Part1') {
-                 sh 'chmod +x gradlew'
                  sh './gradlew clean assemble'
                  }
              }
