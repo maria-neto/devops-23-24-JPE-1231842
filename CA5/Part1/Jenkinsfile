@@ -12,7 +12,7 @@ pipeline {
              steps {
                  dir('CA2/part1') {
                      echo 'Setting executable permissions on gradlew...'
-                     bat 'gradlew.bat'
+                     sh 'chmod +x gradlew'
                  }
              }
          }
@@ -20,7 +20,7 @@ pipeline {
              steps {
                  dir('CA2/Part1') {
                      echo 'Assembling the application...'
-                     bat './gradlew.bat assemble'
+                     sh './gradlew assemble'
                  }
              }
          }
@@ -28,7 +28,7 @@ pipeline {
              steps {
                  dir('CA2/Part1') {
                      echo 'Running unit tests...'
-                     bat './gradlew.bat test'
+                     sh './gradlew test'
                  }
              }
          }
