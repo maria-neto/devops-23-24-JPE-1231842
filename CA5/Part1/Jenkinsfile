@@ -10,30 +10,25 @@ pipeline {
          }
          stage('Set Permissions') {
              steps {
-                 echo 'Setting permissions...'
-                 dir('CA2/Part1') {
-                 sh 'chmod +x gradlew'
+                 dir('CA2/part1') {
+                     echo 'Setting executable permissions on gradlew...'
+                     bat 'gradlew.bat'
                  }
              }
          }
          stage('Assemble') {
              steps {
-                 echo 'Assembling...'
                  dir('CA2/Part1') {
-                 sh './gradlew clean assemble'
+                     echo 'Assembling the application...'
+                     bat './gradlew.bat assemble'
                  }
              }
          }
          stage('Test') {
              steps {
-             echo 'Testing...'
-             dir('CA2/Part1') {
-                 sh './gradlew test'
-             }
-         }
-             post {
-                 always {
-                     junit '**/build/test-results/**/*.xml'
+                 dir('CA2/Part1') {
+                     echo 'Running unit tests...'
+                     bat './gradlew.bat test'
                  }
              }
          }
