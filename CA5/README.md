@@ -26,9 +26,9 @@ the option "Pipeline script from SCM", and to set the SCM to Git, with the repos
 The first pipeline is responsible for checking out, assembling, testing and creating an archive artifact of a Java project. The pipeline is divided into several stages
 responsible for different tasks. The developed stages are the following:
 - Checkout: This stage is responsible for checking out the project from the GitHub repository.
-- Set Permissions: This stage is responsible for setting executable permissions on the Gradle wrapper, using the Gradle command "./gradlew".
-- Assemble: This stage is responsible for assembling the project, using the Gradle command "./gradlew assemble".
-- Test: This stage is responsible for testing the project, using the Gradle command "./gradlew test".
+- Set Permissions: This stage is responsible for setting executable permissions on the Gradle wrapper, using the Gradle command *./gradlew*.
+- Assemble: This stage is responsible for assembling the project, using the Gradle command *./gradlew assemble*.
+- Test: This stage is responsible for testing the project, using the Gradle command *./gradlew test*.
 - Archive: This stage is responsible for creating an archive artifact of the project that will be archived in the Jenkins workspace.
 
 The pipeline script is the following:
@@ -89,9 +89,9 @@ The second pipeline is responsible for checking out, assembling, testing, creati
 The pipeline is divided into several stages, but first, it was required to set the environment variables for the Docker credentials ID, the Docker image and the Docker tag. The
 developed stages are the following:
 - Checkout: This stage is responsible for checking out the project from the GitHub repository.
-- Set Permissions: This stage is responsible for setting executable permissions on the Gradle wrapper, using the Gradle command "./gradlew".
-- Assemble: This stage is responsible for assembling the project, using the Gradle command "./gradlew assemble".
-- Test: This stage is responsible for testing the project, using the Gradle command "./gradlew test".
+- Set Permissions: This stage is responsible for setting executable permissions on the Gradle wrapper, using the Gradle command *./gradlew*.
+- Assemble: This stage is responsible for assembling the project, using the Gradle command *./gradlew assemble*.
+- Test: This stage is responsible for testing the project, using the Gradle command *./gradlew test*.
 - Archive: This stage is responsible for creating an archive artifact of the project that will be archived in the Jenkins workspace.
 - JavaDoc: This stage is responsible for generating the JavaDoc of the project.
 - Create Dockerfile: This stage is responsible for creating a Dockerfile that will be used to generate the Docker image of the project.
@@ -209,8 +209,8 @@ The pipeline was successfully executed, the archive artifact was generated and t
 
 ![Docker Image](docker-image.jpg)
 
-In order to run the Docker image, it was required to pull the image from the Docker Hub, using the command ```bash docker pull 1231842/ca5part2:latest```, and to run the image, using the 
-command ```bash docker run -p 8080:8080 1231842/ca5part2:latest```. After running the image, it was possible to access the application in the browser, using the URL http://localhost:8080.
+In order to run the Docker image, it was required to pull the image from the Docker Hub, using the command ```bash docker pull 1231842/ca5part2:3```, and to run the image, using the 
+command ```bash docker run -p 8080:8080 1231842/ca5part2:3```. After running the image, it was possible to access the application in the browser, using the URL http://localhost:8080.
 
 ![Application](FE-docker-image.jpg)
 
